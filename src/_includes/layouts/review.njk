@@ -1,0 +1,29 @@
+---
+layout: layouts/base.njk
+---
+<article class="review-single">
+
+  <header class="review-header">
+    <a href="/reviews/" class="btn-back">← All Reviews</a>
+    <span class="review-type-badge review-type-badge--{{ type | lower }}">{{ type }}</span>
+    <h1 class="review-title">{{ title }}</h1>
+    <p class="review-meta">
+      <span class="review-year">{{ year }}</span>
+      <span class="review-sep">·</span>
+      <span class="review-category">{{ category }}</span>
+    </p>
+    <p class="review-vibe">{{ vibe }}</p>
+    <p class="review-stars" aria-label="Rating: {{ rating }} out of 5 stars">
+      {{ rating | neonStars }}
+    </p>
+  </header>
+
+  <div class="review-body prose">
+    {{ content | safe }}
+  </div>
+
+  <footer class="review-footer">
+    <a href="/reviews/" class="btn-back">← Back to All Reviews</a>
+  </footer>
+
+</article>

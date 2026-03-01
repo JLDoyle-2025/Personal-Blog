@@ -1,0 +1,713 @@
+/* ============================================================
+   NEON REWIND REVIEWS — Main Stylesheet
+   ============================================================ */
+
+/* ------------------------------------------------------------
+   1. DESIGN TOKENS
+   ------------------------------------------------------------ */
+:root {
+  --color-hot-pink:      #FF2D78;
+  --color-electric-blue: #00F0FF;
+  --color-neon-yellow:   #FFE600;
+  --color-purple-mid:    #7B2FBE;
+  --color-dark-bg:       #0D0020;
+  --color-card-bg:       #150030;
+  --color-text:          #E8D5FF;
+  --color-text-muted:    #9B7FC2;
+  --color-border:        #3D0066;
+
+  --font-display: 'Orbitron', 'Courier New', monospace;
+  --font-mono:    'VT323', 'Courier New', monospace;
+  --font-body:    'Georgia', serif;
+
+  --space-xs: 0.25rem;
+  --space-sm: 0.5rem;
+  --space-md: 1rem;
+  --space-lg: 2rem;
+  --space-xl: 4rem;
+
+  --glow-pink:   0 0 6px var(--color-hot-pink), 0 0 18px var(--color-hot-pink), 0 0 36px rgba(255,45,120,0.5);
+  --glow-blue:   0 0 6px var(--color-electric-blue), 0 0 18px var(--color-electric-blue), 0 0 36px rgba(0,240,255,0.5);
+  --glow-yellow: 0 0 6px var(--color-neon-yellow), 0 0 16px rgba(255,230,0,0.6);
+
+  --radius: 3px;
+  --transition: 0.2s ease;
+}
+
+/* ------------------------------------------------------------
+   2. RESET
+   ------------------------------------------------------------ */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+/* ------------------------------------------------------------
+   3. BASE
+   ------------------------------------------------------------ */
+body {
+  background-color: var(--color-dark-bg);
+  color: var(--color-text);
+  font-family: var(--font-body);
+  font-size: 1.1rem;
+  line-height: 1.7;
+  min-height: 100vh;
+  overflow-x: hidden;
+
+  /* Retro dot-grid background */
+  background-image:
+    radial-gradient(circle, rgba(123,47,190,0.15) 1px, transparent 1px);
+  background-size: 28px 28px;
+}
+
+a {
+  color: var(--color-electric-blue);
+  text-decoration: none;
+  transition: color var(--transition), text-shadow var(--transition);
+}
+
+a:hover {
+  color: var(--color-hot-pink);
+  text-shadow: var(--glow-pink);
+}
+
+/* ------------------------------------------------------------
+   4. CRT SCANLINE OVERLAY
+   ------------------------------------------------------------ */
+.crt-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  pointer-events: none;
+  background: repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 2px,
+    rgba(0, 0, 0, 0.07) 2px,
+    rgba(0, 0, 0, 0.07) 4px
+  );
+  animation: crt-flicker 10s infinite;
+}
+
+@keyframes crt-flicker {
+  0%, 90%, 100% { opacity: 1; }
+  92%           { opacity: 0.96; }
+  94%           { opacity: 1; }
+  96%           { opacity: 0.98; }
+}
+
+/* ------------------------------------------------------------
+   5. LAYOUT
+   ------------------------------------------------------------ */
+.container {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: var(--space-lg) var(--space-lg);
+}
+
+/* ------------------------------------------------------------
+   6. NAVIGATION
+   ------------------------------------------------------------ */
+.site-header {
+  border-bottom: 1px solid var(--color-hot-pink);
+  box-shadow: 0 2px 24px rgba(255, 45, 120, 0.25);
+}
+
+.site-nav {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: var(--space-md) var(--space-lg);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: var(--space-md);
+}
+
+.site-nav__logo {
+  font-family: var(--font-display);
+  font-size: 1rem;
+  font-weight: 900;
+  color: var(--color-hot-pink);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  text-shadow: var(--glow-pink);
+  text-decoration: none;
+}
+
+.site-nav__logo:hover {
+  color: var(--color-hot-pink);
+  text-shadow: var(--glow-pink);
+}
+
+.site-nav__links {
+  display: flex;
+  gap: var(--space-lg);
+  list-style: none;
+}
+
+.site-nav__links a {
+  font-family: var(--font-display);
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: var(--color-electric-blue);
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+}
+
+.site-nav__links a:hover,
+.site-nav__links a[aria-current="page"] {
+  color: var(--color-neon-yellow);
+  text-shadow: var(--glow-yellow);
+}
+
+/* ------------------------------------------------------------
+   7. FOOTER
+   ------------------------------------------------------------ */
+.site-footer {
+  margin-top: var(--space-xl);
+  padding: var(--space-lg);
+  border-top: 1px solid var(--color-border);
+  text-align: center;
+}
+
+.site-footer__tagline {
+  font-family: var(--font-display);
+  font-size: 0.75rem;
+  letter-spacing: 0.15em;
+  color: var(--color-text-muted);
+  text-transform: uppercase;
+  margin-bottom: var(--space-xs);
+}
+
+.site-footer__copy {
+  font-family: var(--font-mono);
+  font-size: 1rem;
+  color: var(--color-purple-mid);
+}
+
+/* ------------------------------------------------------------
+   8. HERO (HOMEPAGE)
+   ------------------------------------------------------------ */
+.hero {
+  text-align: center;
+  padding: var(--space-xl) 0 var(--space-lg);
+}
+
+.hero-title {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-family: var(--font-display);
+  font-weight: 900;
+  font-size: clamp(2.5rem, 8vw, 5rem);
+  line-height: 1.1;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: var(--space-md);
+}
+
+.hero-title__neon    { color: var(--color-hot-pink);      text-shadow: var(--glow-pink); }
+.hero-title__rewind  { color: var(--color-electric-blue); text-shadow: var(--glow-blue); }
+.hero-title__reviews { color: var(--color-neon-yellow);   text-shadow: var(--glow-yellow); }
+
+.hero-tagline {
+  font-family: var(--font-display);
+  font-size: clamp(0.75rem, 2vw, 1rem);
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--color-text-muted);
+  margin-bottom: var(--space-lg);
+}
+
+.hero-intro {
+  max-width: 640px;
+  margin: 0 auto var(--space-lg);
+  color: var(--color-text);
+  font-size: 1.05rem;
+}
+
+/* ------------------------------------------------------------
+   9. BUTTONS
+   ------------------------------------------------------------ */
+.btn-primary {
+  display: inline-block;
+  font-family: var(--font-display);
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  padding: 0.75em 1.75em;
+  color: var(--color-dark-bg);
+  background: var(--color-hot-pink);
+  border: none;
+  border-radius: var(--radius);
+  box-shadow: var(--glow-pink);
+  transition: background var(--transition), box-shadow var(--transition), transform var(--transition);
+  text-decoration: none;
+}
+
+.btn-primary:hover {
+  background: #ff5599;
+  box-shadow: var(--glow-pink), 0 4px 20px rgba(255,45,120,0.6);
+  transform: translateY(-2px);
+  color: var(--color-dark-bg);
+  text-shadow: none;
+}
+
+.btn-back {
+  display: inline-block;
+  font-family: var(--font-display);
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--color-electric-blue);
+  text-decoration: none;
+  margin-bottom: var(--space-md);
+}
+
+.btn-back:hover {
+  color: var(--color-neon-yellow);
+  text-shadow: var(--glow-yellow);
+}
+
+/* ------------------------------------------------------------
+   10. SECTION HEADINGS
+   ------------------------------------------------------------ */
+.section-heading {
+  font-family: var(--font-display);
+  font-size: clamp(1.2rem, 3.5vw, 2rem);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--color-electric-blue);
+  text-shadow: var(--glow-blue);
+  margin-bottom: var(--space-lg);
+  padding-bottom: var(--space-sm);
+  border-bottom: 1px solid var(--color-border);
+}
+
+/* ------------------------------------------------------------
+   11. REVIEW CARDS & GRID
+   ------------------------------------------------------------ */
+.latest-reviews,
+.reviews-listing {
+  margin-top: var(--space-xl);
+}
+
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: var(--space-lg);
+}
+
+.review-card {
+  background: var(--color-card-bg);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  transition: transform var(--transition), box-shadow var(--transition);
+}
+
+.review-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 32px rgba(0, 240, 255, 0.18);
+}
+
+/* Color stripe at top indicates type */
+.card-type-stripe {
+  height: 4px;
+  width: 100%;
+}
+.card-type-stripe--movie { background: var(--color-hot-pink);      box-shadow: var(--glow-pink); }
+.card-type-stripe--book  { background: var(--color-electric-blue); box-shadow: var(--glow-blue); }
+
+.card-body {
+  padding: var(--space-md) var(--space-lg);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xs);
+  flex: 1;
+}
+
+.card-type-label {
+  font-family: var(--font-display);
+  font-size: 0.6rem;
+  font-weight: 900;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  padding: 0.2em 0.6em;
+  border-radius: 2px;
+  display: inline-block;
+  align-self: flex-start;
+}
+
+.card-type-label--movie {
+  color: var(--color-hot-pink);
+  border: 1px solid var(--color-hot-pink);
+}
+
+.card-type-label--book {
+  color: var(--color-electric-blue);
+  border: 1px solid var(--color-electric-blue);
+}
+
+.card-title {
+  font-family: var(--font-display);
+  font-size: 0.95rem;
+  font-weight: 700;
+  line-height: 1.3;
+  margin-top: var(--space-xs);
+}
+
+.card-title a {
+  color: var(--color-text);
+  text-decoration: none;
+  transition: color var(--transition), text-shadow var(--transition);
+}
+
+.card-title a:hover {
+  color: var(--color-hot-pink);
+  text-shadow: var(--glow-pink);
+}
+
+.card-meta {
+  font-size: 0.8rem;
+  color: var(--color-text-muted);
+}
+
+.card-vibe {
+  font-size: 0.9rem;
+  color: var(--color-text);
+  font-style: italic;
+  margin-top: var(--space-xs);
+}
+
+.card-stars,
+.review-stars {
+  font-family: var(--font-mono);
+  font-size: 1.4rem;
+  color: var(--color-neon-yellow);
+  text-shadow: var(--glow-yellow);
+  letter-spacing: 0.05em;
+  margin-top: auto;
+  padding-top: var(--space-sm);
+}
+
+/* Hidden state for JS filtering */
+.review-card[hidden] {
+  display: none;
+}
+
+/* ------------------------------------------------------------
+   12. FILTER BAR
+   ------------------------------------------------------------ */
+.filter-bar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-md);
+  margin-bottom: var(--space-lg);
+  padding: var(--space-md) var(--space-lg);
+  background: var(--color-card-bg);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+}
+
+.filter-group {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  flex-wrap: wrap;
+}
+
+.filter-label {
+  font-family: var(--font-display);
+  font-size: 0.65rem;
+  letter-spacing: 0.15em;
+  color: var(--color-text-muted);
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.filter-btn {
+  font-family: var(--font-display);
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 0.35em 0.9em;
+  background: transparent;
+  color: var(--color-electric-blue);
+  border: 1px solid var(--color-electric-blue);
+  border-radius: 2px;
+  cursor: pointer;
+  transition: background var(--transition), color var(--transition), box-shadow var(--transition);
+}
+
+.filter-btn:hover {
+  background: rgba(0, 240, 255, 0.08);
+  box-shadow: 0 0 8px rgba(0,240,255,0.4);
+}
+
+.filter-btn.active {
+  background: var(--color-electric-blue);
+  color: var(--color-dark-bg);
+  box-shadow: var(--glow-blue);
+}
+
+.review-count {
+  font-size: 0.85rem;
+  color: var(--color-text-muted);
+  margin-bottom: var(--space-md);
+}
+
+.no-results {
+  text-align: center;
+  padding: var(--space-xl);
+  color: var(--color-text-muted);
+  font-family: var(--font-display);
+  font-size: 0.85rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+/* ------------------------------------------------------------
+   13. SINGLE REVIEW PAGE
+   ------------------------------------------------------------ */
+.review-single {
+  max-width: 760px;
+  margin: 0 auto;
+  padding: var(--space-lg) 0;
+}
+
+.review-header {
+  margin-bottom: var(--space-lg);
+  padding-bottom: var(--space-lg);
+  border-bottom: 1px solid var(--color-border);
+}
+
+.review-type-badge {
+  font-family: var(--font-display);
+  font-size: 0.7rem;
+  font-weight: 900;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  padding: 0.25em 0.9em;
+  border-radius: 2px;
+  display: inline-block;
+  margin-bottom: var(--space-sm);
+}
+
+.review-type-badge--movie {
+  color: var(--color-hot-pink);
+  border: 2px solid var(--color-hot-pink);
+  box-shadow: var(--glow-pink);
+}
+
+.review-type-badge--book {
+  color: var(--color-electric-blue);
+  border: 2px solid var(--color-electric-blue);
+  box-shadow: var(--glow-blue);
+}
+
+.review-title {
+  font-family: var(--font-display);
+  font-size: clamp(1.6rem, 5vw, 2.8rem);
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--color-text);
+  text-shadow: 0 0 20px rgba(232, 213, 255, 0.3);
+  margin-bottom: var(--space-sm);
+  line-height: 1.15;
+}
+
+.review-meta {
+  font-size: 0.9rem;
+  color: var(--color-text-muted);
+  margin-bottom: var(--space-sm);
+}
+
+.review-sep {
+  margin: 0 0.4em;
+}
+
+.review-vibe {
+  font-style: italic;
+  color: var(--color-text);
+  margin-bottom: var(--space-sm);
+}
+
+.review-stars {
+  font-family: var(--font-mono);
+  font-size: 2rem;
+  color: var(--color-neon-yellow);
+  text-shadow: var(--glow-yellow);
+}
+
+/* ------------------------------------------------------------
+   14. PROSE (review body content)
+   ------------------------------------------------------------ */
+.prose {
+  color: var(--color-text);
+  line-height: 1.8;
+}
+
+.prose h1,
+.prose h2,
+.prose h3 {
+  font-family: var(--font-display);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin: var(--space-lg) 0 var(--space-sm);
+  color: var(--color-electric-blue);
+}
+
+.prose h1 { font-size: 1.4rem; }
+.prose h2 { font-size: 1.1rem; }
+
+.prose p {
+  margin-bottom: var(--space-md);
+}
+
+.prose strong {
+  color: var(--color-hot-pink);
+  font-weight: 700;
+}
+
+.prose em {
+  color: var(--color-neon-yellow);
+  font-style: italic;
+}
+
+.prose ul, .prose ol {
+  padding-left: var(--space-lg);
+  margin-bottom: var(--space-md);
+}
+
+.prose li {
+  margin-bottom: var(--space-xs);
+}
+
+.prose hr {
+  border: none;
+  border-top: 1px solid var(--color-border);
+  margin: var(--space-lg) 0;
+}
+
+/* Neon-styled HR for about page */
+.neon-hr {
+  border: none;
+  height: 1px;
+  background: linear-gradient(
+    to right,
+    transparent,
+    var(--color-hot-pink),
+    var(--color-electric-blue),
+    transparent
+  );
+  margin: var(--space-lg) 0;
+  box-shadow: 0 0 8px rgba(0,240,255,0.4);
+}
+
+/* ------------------------------------------------------------
+   15. SPOILER BLOCK
+   ------------------------------------------------------------ */
+.spoiler-block {
+  border: 1px dashed var(--color-hot-pink);
+  border-radius: var(--radius);
+  margin: var(--space-lg) 0;
+  overflow: hidden;
+}
+
+.spoiler-toggle {
+  font-family: var(--font-display);
+  font-size: 0.75rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--color-hot-pink);
+  padding: var(--space-sm) var(--space-md);
+  cursor: pointer;
+  user-select: none;
+  display: block;
+  list-style: none;
+  transition: background var(--transition);
+}
+
+.spoiler-toggle::-webkit-details-marker { display: none; }
+
+.spoiler-toggle:hover {
+  background: rgba(255, 45, 120, 0.08);
+}
+
+.spoiler-content {
+  padding: var(--space-md);
+  border-top: 1px dashed var(--color-hot-pink);
+  background: rgba(255, 45, 120, 0.04);
+}
+
+/* ------------------------------------------------------------
+   16. ABOUT PAGE
+   ------------------------------------------------------------ */
+.about-page h1 {
+  font-family: var(--font-display);
+  font-size: clamp(1.5rem, 4vw, 2.2rem);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--color-hot-pink);
+  text-shadow: var(--glow-pink);
+  margin-bottom: var(--space-lg);
+}
+
+.about-page h2 {
+  font-family: var(--font-display);
+  font-size: 1.1rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--color-electric-blue);
+  text-shadow: var(--glow-blue);
+  margin-bottom: var(--space-md);
+}
+
+.placeholder-bio {
+  color: var(--color-text-muted);
+  font-style: italic;
+}
+
+/* ------------------------------------------------------------
+   17. RESPONSIVE
+   ------------------------------------------------------------ */
+@media (max-width: 700px) {
+  .site-nav {
+    flex-direction: column;
+    gap: var(--space-sm);
+    text-align: center;
+  }
+
+  .site-nav__links {
+    gap: var(--space-md);
+  }
+
+  .hero-title {
+    font-size: clamp(2rem, 12vw, 3rem);
+  }
+
+  .card-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .filter-bar {
+    flex-direction: column;
+  }
+
+  .container {
+    padding: var(--space-md);
+  }
+
+  .review-single {
+    padding: var(--space-md) 0;
+  }
+}

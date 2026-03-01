@@ -1,0 +1,12 @@
+<header class="site-header">
+  <nav class="site-nav">
+    <a href="/" class="site-nav__logo" aria-label="{{ site.title }} home">
+      Neon Rewind
+    </a>
+    <ul class="site-nav__links">
+      <li><a href="/" {% if page.url == "/" %}aria-current="page"{% endif %}>Home</a></li>
+      <li><a href="/reviews/" {% if "/reviews/" in page.url %}aria-current="page"{% endif %}>Reviews</a></li>
+      <li><a href="/about/" {% if page.url == "/about/" %}aria-current="page"{% endif %}>About</a></li>
+    </ul>
+  </nav>
+</header>

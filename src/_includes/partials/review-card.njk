@@ -1,0 +1,18 @@
+<article
+  class="review-card"
+  data-type="{{ review.data.type | lower }}"
+  data-category="{{ review.data.category | slugify }}"
+>
+  <div class="card-type-stripe card-type-stripe--{{ review.data.type | lower }}"></div>
+  <div class="card-body">
+    <span class="card-type-label card-type-label--{{ review.data.type | lower }}">{{ review.data.type }}</span>
+    <h2 class="card-title">
+      <a href="{{ review.url }}">{{ review.data.title }}</a>
+    </h2>
+    <p class="card-meta">{{ review.data.year }} · {{ review.data.category }}</p>
+    <p class="card-vibe">{{ review.data.vibe }}</p>
+    <p class="card-stars" aria-label="Rating: {{ review.data.rating }} out of 5 stars">
+      {{ review.data.rating | neonStars }}
+    </p>
+  </div>
+</article>

@@ -1,0 +1,43 @@
+---
+layout: layouts/base.njk
+title: All Reviews
+filterPage: true
+permalink: /reviews/index.html
+---
+
+<section class="reviews-listing">
+  <h1 class="section-heading">All Reviews</h1>
+
+  <div class="filter-bar" role="group" aria-label="Filter reviews">
+    <div class="filter-group">
+      <span class="filter-label">Type:</span>
+      <button class="filter-btn active" data-filter-type="all">All</button>
+      <button class="filter-btn" data-filter-type="movie">Movies</button>
+      <button class="filter-btn" data-filter-type="book">Books</button>
+    </div>
+    <div class="filter-group">
+      <span class="filter-label">Category:</span>
+      <button class="filter-btn active" data-filter-cat="all">All</button>
+      <button class="filter-btn" data-filter-cat="80s-sci-fi-flicks">80s Sci-Fi Flicks</button>
+      <button class="filter-btn" data-filter-cat="retro-rom-coms">Retro Rom-Coms</button>
+      <button class="filter-btn" data-filter-cat="cult-classics">Cult Classics</button>
+      <button class="filter-btn" data-filter-cat="paperbacks-pulp">Paperbacks &amp; Pulp</button>
+    </div>
+  </div>
+
+  <p class="review-count" aria-live="polite">
+    Showing <span id="visible-count">{{ collections.reviews | length }}</span>
+    of {{ collections.reviews | length }} reviews
+  </p>
+
+  <div class="card-grid" id="review-grid">
+    {% for review in collections.reviews %}
+      {% include "partials/review-card.njk" %}
+    {% endfor %}
+  </div>
+
+  <p class="no-results" id="no-results" hidden>
+    No reviews match that filter. Try a different combination!
+  </p>
+
+</section>

@@ -1,0 +1,14 @@
+{
+  "name": "neon-rewind-reviews",
+  "version": "1.0.0",
+  "description": "80s-themed book and movie review site",
+  "scripts": {
+    "build": "eleventy",
+    "start": "eleventy --serve --watch",
+    "debug": "DEBUG=Eleventy* eleventy"
+  },
+  "devDependencies": {
+    "@11ty/eleventy": "^3.0.0",
+    "markdown-it": "^14.0.0"
+  }
+}

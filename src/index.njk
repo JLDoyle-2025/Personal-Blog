@@ -1,0 +1,29 @@
+---
+layout: layouts/base.njk
+title: Home
+description: "A cozy corner of the internet for 1980s-inspired book and movie reviews."
+---
+
+<section class="hero">
+  <h1 class="hero-title">
+    <span class="hero-title__neon">Neon</span>
+    <span class="hero-title__rewind">Rewind</span>
+    <span class="hero-title__reviews">Reviews</span>
+  </h1>
+  <p class="hero-tagline">{{ site.tagline }}</p>
+  <p class="hero-intro">
+    Welcome to <strong>Neon Rewind Reviews</strong>, a cozy corner of the internet where we
+    revisit books and movies through a totally 1980s&#8209;inspired lens. Grab your VHS tapes,
+    mixtapes, and dog&#8209;eared paperbacks&mdash;let&rsquo;s hit rewind.
+  </p>
+  <a href="/reviews/" class="btn-primary">Browse All Reviews</a>
+</section>
+
+<section class="latest-reviews">
+  <h2 class="section-heading">Latest Reviews</h2>
+  <div class="card-grid">
+    {% for review in collections.latestReviews %}
+      {% include "partials/review-card.njk" %}
+    {% endfor %}
+  </div>
+</section>
